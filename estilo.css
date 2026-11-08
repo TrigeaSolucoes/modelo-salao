@@ -50,7 +50,7 @@ a{color:var(--ameixa)}
 .prof h3{font-size:40px}
 .prof p{margin:0;color:var(--fosco);min-height:3.2em}
 .dias{display:flex;flex-wrap:wrap;gap:6px}
-.dias button{width:44px;height:44px;border-radius:50%;border:1px solid #bfae9f;background:transparent;color:var(--preto);cursor:pointer;font-size:13px}
+.dias button{width:44px;height:44px;border-radius:50%;border:1px solid #bfae9f;background:transparent;color:var(--preto);cursor:pointer;font-size:14px}
 .dias button:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through}
 .dias button[aria-pressed="true"]{background:var(--ameixa);border-color:var(--ameixa);color:#fff}
 .marcar{margin-top:6px;font-size:15px}
@@ -83,3 +83,5 @@ a{color:var(--ameixa)}
 @media (max-width:480px){.profissionais ul{grid-template-columns:1fr}}
 .rituais ul[role="tabpanel"]{margin:0 auto;max-width:900px}
 @media (max-width:860px){.abertura-foto img{aspect-ratio:4/3;border-radius:160px 160px 0 0}.abertura h1{margin-bottom:-36px}}
+/* revisão de usabilidade no celular */
+@media (max-width:760px){main :is(button,select,input:not([type=checkbox]):not([type=radio]),.botao){min-height:44px}main label:has(>input[type=radio]),main label:has(>input[type=checkbox]){min-height:40px;display:flex;align-items:center;gap:8px}.marcar{display:inline-block;padding:10px 0}}
