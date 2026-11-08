@@ -1,15 +1,22 @@
-// Única interação: escolher um horário monta a mensagem do WhatsApp.
-document.querySelectorAll(".agenda").forEach((agenda) => {
-  const botao = agenda.querySelector(".agenda-botao");
-  const base = new URL(agenda.dataset.whatsapp);
-  const negocio = agenda.dataset.negocio;
-  agenda.querySelectorAll(".horario").forEach((h) => {
-    h.addEventListener("click", () => {
-      agenda.querySelectorAll(".horario").forEach((x) => x.setAttribute("aria-pressed", "false"));
-      h.setAttribute("aria-pressed", "true");
-      base.searchParams.set("text", `Olá! Quero agendar em ${negocio}: ${h.dataset.texto}.`);
-      botao.href = base.toString();
-      botao.textContent = `Agendar ${h.dataset.texto}`;
-    });
+// Abas de serviços e escolha de dia por profissional (monta a mensagem do WhatsApp).
+const abas = [...document.querySelectorAll('[role="tab"]')];
+abas.forEach((a) => a.addEventListener("click", () => {
+  abas.forEach((x) => {
+    x.setAttribute("aria-selected", String(x === a));
+    document.getElementById(x.getAttribute("aria-controls")).hidden = x !== a;
   });
+}));
+
+const lista = document.querySelector(".profissionais ul");
+const base = lista ? new URL(lista.dataset.whatsapp) : null;
+document.querySelectorAll(".prof").forEach((prof) => {
+  const nome = prof.dataset.nome;
+  const link = prof.querySelector(".marcar");
+  prof.querySelectorAll(".dias button").forEach((d) => d.addEventListener("click", () => {
+    prof.querySelectorAll(".dias button").forEach((x) => x.setAttribute("aria-pressed", String(x === d)));
+    const url = new URL(base);
+    url.searchParams.set("text", `Oi! Quero marcar com a ${nome} na ${d.textContent}. Qual horário tem livre?`);
+    link.href = url.toString();
+    link.textContent = `Marcar com ${nome} na ${d.textContent}`;
+  }));
 });
